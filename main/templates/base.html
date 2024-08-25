@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href={% static "main/css/globals.css" %}/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      tailwind.config = {
+          theme: {
+              screens: {
+                  sm: '480px',
+                  md: '768px',
+                  lg: '1300px',
+                  xl: '1700px',
+              }
+          }
+      }
+  </script>
+</head>
+<body class="color-[#212529] mb-5 mt-2">
+{% block content %}{% endblock %}
+</body>
+</html>

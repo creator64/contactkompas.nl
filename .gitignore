@@ -1,0 +1,5 @@
+# env files
+.env
+
+# jetbrains files
+.idea

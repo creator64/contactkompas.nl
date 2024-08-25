@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+  zoek een webshop
+{% endblock %}
+{% block content %}
+  <div class="flex flex-col h-100 py-20 px-5 md:px-40 lg:px-60 gap-y-6" style="place-content: center">
+    <h1 class="text-center text-2xl md:text-3xl lg:text-5xl">Welkom bij contactkompas.nl</h1>
+    {% include "components/shared/searchbar.html" %}
+    <u class="text-center mt-4">Zoek naar contactgegevens van populaire bedrijven!</u>
+  </div>
+  <div class="p-4">{% include "components/shared/most-popular-companies.html" %}</div>
+{% endblock %}

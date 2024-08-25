@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %} zoeken {% endblock %}
+{% block content %}
+  <div class="px-5 md:px-10 mt-3">
+    <div class="text-center text-2xl mb-4">contactkompas.nl</div>
+    {% include "components/shared/searchbar.html" %}
+    <br>
+    <div><b>Gevonden resultaten voor "{{ filter }}"</b></div>
+    <br>
+    {% include "components/shared/company-collection.html" with companies=companies %}
+    <br><br>
+    {% include "components/shared/most-popular-companies.html" %}
+  </div>
+
+{% endblock %}

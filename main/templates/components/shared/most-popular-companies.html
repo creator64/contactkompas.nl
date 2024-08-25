@@ -1,0 +1,17 @@
+{% load static %}
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="{% static 'main/js/load-more-companies-button.js' %}" type="module"></script>
+</head>
+
+<div class="flex flex-col gap-y-8 p-2">
+  <div><b class="text-xl">Meest populaire bedrijven</b></div>
+  <i class="hidden" id="mpc-loading-init">Aan het laden...</i>
+  {% include "components/shared/company-collection.html" with id="mpc-company-collection-container" only %}
+  <button class="w-[80%] max-w-[300px] mx-4 h-[50px] rounded-full self-center flex items-center justify-center text-white bg-[#000]"
+          id="mpc-load-more">
+    Laad meer bedrijven
+  </button>
+  <p class="text-[#f00] self-center hidden" id="mpc-error-message">
+    Er heeft zich een onbekende fout voorgedaan. Onze excuses voor het ongemak</p>
+</div>

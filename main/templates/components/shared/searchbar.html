@@ -1,0 +1,9 @@
+<form role="search" action="/search" method="get">
+  <div class="flex flex-row justify-center rounded-full border" style="box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);">
+    <input class="w-full mx-6 rounded-5 h-[50px] bg-transparent outline-none"
+           type="search" placeholder="Zoek hier naar een bedrijf" aria-label="Search" name="company">
+    <button class="bg-transparent w-[18px] mr-4" type="submit">
+      {% include "components/shared/icons/magnifying-glass.html" %}
+    </button>
+  </div>
+</form>
