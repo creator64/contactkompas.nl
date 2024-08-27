@@ -7,3 +7,6 @@ class Bedrijf(models.Model):
     email = models.EmailField(null=True)
     image_url = models.CharField(max_length=200, null=True)
     popularity = models.IntegerField(db_index=True, null=True)
+
+    def __str__(self):
+        return self.name
