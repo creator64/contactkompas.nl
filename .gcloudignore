@@ -1,0 +1,12 @@
+.gcloudignore
+.git
+.gitignore
+
+# Python pycache:
+__pycache__/
+
+# jetbrains files
+.idea
+
+# virtualenv
+venv/
