@@ -6,4 +6,4 @@
 .idea
 
 # static files
-/staticfiles
+/static

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 from pathlib import Path
 import os
+from urllib.parse import urlparse
+
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +26,20 @@ env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-&psk#na5l=p3q8_a+-$4w1f^lt3lx1c@d*p4x$ymm_rn7pwb87')
 DEBUG = os.environ.get('DJANGO_DEBUG_VALUE', '') != 'False'
 
-ALLOWED_HOSTS = ['localhost', '192.168.178.21']
+# Allowed Hosts
+APPENGINE_URL = os.environ.get("APPENGINE_URL", None)
+if APPENGINE_URL:
+    # Ensure a scheme is present in the URL before it's processed.
+    if not urlparse(APPENGINE_URL).scheme:
+        APPENGINE_URL = f"https://{APPENGINE_URL}"
+
+    ALLOWED_HOSTS = [urlparse(APPENGINE_URL).netloc]
+    CSRF_TRUSTED_ORIGINS = [APPENGINE_URL]
+    SECURE_SSL_REDIRECT = True
+else:
+    ALLOWED_HOSTS = ["*"]
+
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -112,8 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-auto-field
