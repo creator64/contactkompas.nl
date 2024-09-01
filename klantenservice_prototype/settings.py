@@ -24,7 +24,7 @@ env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-&psk#na5l=p3q8_a+-$4w1f^lt3lx1c@d*p4x$ymm_rn7pwb87')
-DEBUG = os.environ.get('DJANGO_DEBUG_VALUE', '') != 'False'
+DEBUG = os.environ.get('DJANGO_DEBUG_VALUE', '') == 'True'
 
 # Allowed Hosts
 APPENGINE_URL = os.environ.get("APPENGINE_URL", None)
@@ -38,8 +38,6 @@ if APPENGINE_URL:
     SECURE_SSL_REDIRECT = True
 else:
     ALLOWED_HOSTS = ["*"]
-
-ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
