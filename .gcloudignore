@@ -10,3 +10,6 @@ __pycache__/
 
 # virtualenv
 venv/
+
+# local env
+.env.local

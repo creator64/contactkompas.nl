@@ -18,7 +18,10 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+env_path = load_dotenv(os.path.join(BASE_DIR, '.env.local'))
+
+if not env_path:
+    env_path = load_dotenv(os.path.join(BASE_DIR, '.env.cloud'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
