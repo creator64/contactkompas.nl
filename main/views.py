@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from .utils import remove_multiple_characters, sql_nested_replace
 
 from main.models import Bedrijf
 
@@ -10,12 +11,19 @@ def index(request):
 
 
 def search(request):
-    search_filter = request.GET.get("company", "")
-    # todo: create function to make a nested replace function
-    companies = Bedrijf.objects.raw("select name from main_bedrijf where replace(name, ' ', '') like %s",
-                                    [f'%{search_filter.replace(" ", "")}%'])
+    search_query = request.GET.get("company", "")
+
+    chars_to_remove = [" ", "&", "-"]
+    reduced_filter = remove_multiple_characters(search_query, *chars_to_remove)
+    sql_replace_string = sql_nested_replace("name", *chars_to_remove)
+    companies = Bedrijf.objects.raw(
+        f"select name from main_bedrijf where {sql_replace_string} like %s",
+        # No danger of sql injection as sql_replace_string cannot be changed by a user in any way
+        [f"%{reduced_filter}%"]
+    )
+
     template = loader.get_template("pages/search.html")
-    return HttpResponse(template.render({'companies': companies, 'filter': search_filter}))
+    return HttpResponse(template.render({'companies': companies, 'query': search_query}))
 
 
 def most_popular_companies(request):
