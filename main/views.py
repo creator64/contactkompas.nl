@@ -11,7 +11,9 @@ def index(request):
 
 def search(request):
     search_filter = request.GET.get("company", "")
-    companies = Bedrijf.objects.filter(name__contains=search_filter)
+    # todo: create function to make a nested replace function
+    companies = Bedrijf.objects.raw("select name from main_bedrijf where replace(name, ' ', '') like %s",
+                                    [f'%{search_filter.replace(" ", "")}%'])
     template = loader.get_template("pages/search.html")
     return HttpResponse(template.render({'companies': companies, 'filter': search_filter}))
 
